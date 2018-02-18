@@ -1,0 +1,14 @@
+.card {
+    margin-bottom: 12px;
+    width: 400px;
+    padding: 8px;
+    box-shadow: #eeeeee 1px 1px 1px;
+}
+
+.card input {
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+}
