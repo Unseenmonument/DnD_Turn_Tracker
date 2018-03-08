@@ -1,7 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-export default ({ id, name, initiative, onNameChange, onInitiativeChange }) => 
+export default ({ 
+    id, 
+    name, 
+    initiative, 
+    hitpoints, 
+    onNameChange, 
+    onInitiativeChange, 
+    onHitpointsChange 
+}) => 
     <div className="card">
-        <input type="text" value={name} onNameChange={e => onNameChange(id, e)} />
-        <input type="number" value={initiative} onInitiativeChange={e => onInitiativeChange(id, e)} />
+        <label> Name: <input type="text" value={name} onChange={e => onNameChange(id, e)} /> </label>
+        <label> Initiative: <input type="number" value={initiative} onChange={e => onInitiativeChange(id, e)} /> </label>
+        <label> Hitpoint: <input type="number" value={hitpoints} onChange={e => onHitpointsChange(id, e)} /> </label>
     </div>
