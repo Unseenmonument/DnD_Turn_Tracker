@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Input from './Input';
 
 export default ({ 
     id, 
@@ -7,10 +8,32 @@ export default ({
     hitpoints, 
     onNameChange, 
     onInitiativeChange, 
-    onHitpointsChange 
+    onHitpointsChange,
+    onRemove 
 }) => 
     <div className="card">
-        <label> Name: <input type="text" value={name} onChange={e => onNameChange(id, e)} /> </label>
-        <label> Initiative: <input type="number" value={initiative} onChange={e => onInitiativeChange(id, e)} /> </label>
-        <label> Hitpoint: <input type="number" value={hitpoints} onChange={e => onHitpointsChange(id, e)} /> </label>
+        <Input
+          label="Name"
+          type="text"
+          value={name}
+          onChange={e => onNameChange(id, e)}
+        />
+
+        <Input
+          label="Initiative"
+          type="number"
+          value={initiative}
+          onChange={e => onInitiativeChange(id, e)}
+        />
+
+        <Input
+          label="Hitpoints"
+          type="number"
+          value={hitpoints}
+          onChange={e => onHitpointsChange(id, e)}
+        />
+
+        <button onClick={() => onRemove(id)}>
+            X
+        </button>
     </div>

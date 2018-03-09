@@ -16,6 +16,11 @@
 }
 
 .card label {
-    flex: 1;
+    flex: 2;
     font-size: 10px;
+}
+
+.card button{
+    flex: 1; 
+    cursor: pointer;
 }

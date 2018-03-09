@@ -1,45 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
 import Card from './Card';
-
-const randomId = () =>
-  Math.random() = 100000; 
+import { randomId } from './utils'
+import { initialState } from './constants'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      elements: [{
-        id: 1,
-        name: 'Player 1',
-        initiative: 20,
-        hitpoints: 10,
-      }, {
-        id: 2,
-        name: 'Player 2',
-        initiative: 19,
-        hitpoints: 16,      
-      }, {
-        id: 3,
-        name: 'Player 3',
-        initiative: 18,
-        hitpoints: 20, 
-      }, {
-        id: 4,
-        name: 'Player 4',
-        initiative: 17,
-        hitpoints: 32,
-      }],
+      elements: initialState,
     };
     this.updateName = this.updateName.bind(this);
     this.updateInitiative = this.updateInitiative.bind(this);
     this.updateHitpoints = this.updateHitpoints.bind(this);
     this.addCard = this.addCard.bind(this);
+    this.removeElement = this.removeElement.bind(this);
   }
 
   updateName(id, e) {
     const { value } = e.target;
-    const elements = this.setState.elements;
+    const elements = this.state.elements;
     const index = elements.findIndex(el => el.id === id);
     elements[index].name = value; 
     this.setState({ elements })
@@ -47,7 +27,7 @@ class App extends Component {
 
   updateHitpoints(id, e) {
     const { value } = e.target;
-    const elements = this.setState.elements;
+    const elements = this.state.elements;
     const index = elements.findIndex(el => el.id === id);
     elements[index].hitpoints = Number(value); 
     this.setState({ elements })
@@ -56,7 +36,7 @@ class App extends Component {
   updateInitiative(id, e) {
     clearTimeout(this.timeout_);
     const { value } = e.target;
-    const elements = this.setState.elements;
+    const elements = this.state.elements;
     const index = elements.findIndex(el => el.id === id);
     elements[index].initiative = Number(value); 
     this.setState({ elements });
@@ -73,14 +53,20 @@ class App extends Component {
   addCard() {
     const { elements } = this.state;
     elements[elements.length] = {
-      id: elements.length + 1,
-      name: 'Player ${elements.length + 1}',
+      id: randomId(),
+      name: `Player ${elements.length + 1}`,
       initiative: -100,
       hitpoints: 12,
     };
     this.setState({
       elements: elements.sort((l, r) => r.initiative - l.initiative)
-    })
+    });
+  }
+
+  removeElement(id) {
+    let { elements } = this.state;
+    elements = elements.filter(el => el.id !== id);
+    this.setState({ elements });
   }
 
   render() {
@@ -98,6 +84,7 @@ class App extends Component {
           onNameChange={this.updateName}
           onInitiativeChange={this.updateInitiative}
           onHitpointsChange={this.updateHitpoints}
+          onRemove={this.removeElement}
         />
         )}        
       </div>
